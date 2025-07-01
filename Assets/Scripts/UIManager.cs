@@ -45,11 +45,11 @@ public class UIManager : MonoBehaviour
         gameManager = GameManager.Instance;
         if (gameManager == null)
         {
-            gameManager = FindObjectOfType<GameManager>();
+            gameManager = FindFirstObjectByType<GameManager>();
         }
         
-        waveManager = FindObjectOfType<WaveManager>();
-        towerPlacer = FindObjectOfType<TowerPlacer>();
+        waveManager = FindFirstObjectByType<WaveManager>();
+        towerPlacer = FindFirstObjectByType<TowerPlacer>();
         
         // Subscribe to events
         if (gameManager != null)
@@ -339,6 +339,7 @@ public class UIManager : MonoBehaviour
     
     private void StartNextWave()
     {
+        Debug.Log("Starting next wave...");
         if (waveManager != null)
         {
             waveManager.ForceStartNextWave();
@@ -347,6 +348,7 @@ public class UIManager : MonoBehaviour
     
     private void RestartGame()
     {
+        Debug.Log("Restarting game...");
         if (gameManager != null)
         {
             gameManager.RestartGame();
@@ -355,6 +357,7 @@ public class UIManager : MonoBehaviour
     
     private void TogglePause()
     {
+        Debug.Log("Toggling pause...");
         if (gameManager != null)
         {
             gameManager.TogglePause();

@@ -1,2 +1,31 @@
 fileFormatVersion: 2
 guid: 73ef8847af0e3354fb1b85e79a91cd23
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - moneyText: {instanceID: 0}
+  - livesText: {instanceID: 0}
+  - waveText: {fileID: 1179249991436778495, guid: 5f398d223fae2dd42b19867206bba6ed, type: 3}
+  - enemiesText: {instanceID: 0}
+  - startWaveButton: {fileID: 4589111280624080660, guid: ef9002e3f2481cb4c91b0382a1823bd1, type: 3}
+  - waveProgressSlider: {instanceID: 0}
+  - waveProgressText: {instanceID: 0}
+  - towerButtonContainer: {instanceID: 0}
+  - towerButtonPrefab: {instanceID: 0}
+  - gameOverPanel: {instanceID: 0}
+  - gameWonPanel: {instanceID: 0}
+  - pausePanel: {instanceID: 0}
+  - restartButton: {fileID: 761076136106937107, guid: 9065519cdf13165428e36a627f257073, type: 3}
+  - pauseButton: {fileID: 3771028392011836105, guid: a70c54a3a0065f749b833161bdd83ea0, type: 3}
+  - resumeButton: {fileID: 3975040379053694910, guid: 437d70f01a1eb574abe6a68cf95aab28, type: 3}
+  - towerInfoPanel: {instanceID: 0}
+  - towerNameText: {instanceID: 0}
+  - towerStatsText: {instanceID: 0}
+  - sellTowerButton: {instanceID: 0}
+  - upgradeTowerButton: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
