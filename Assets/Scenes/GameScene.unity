@@ -715,6 +715,7 @@ GameObject:
   - component: {fileID: 335966925}
   - component: {fileID: 335966924}
   - component: {fileID: 335966927}
+  - component: {fileID: 335966928}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -840,6 +841,31 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &335966928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335966923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d33669992b89e4aa914fe498843365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  baseDistance: 10
+  horizontalSpeed: 100
+  verticalSpeed: 80
+  zoomSpeed: 2
+  minZoomFactor: 0.5
+  maxZoomFactor: 2
+  minVerticalAngle: -80
+  maxVerticalAngle: 80
+  movementSmoothing: 5
+  zoomSmoothing: 8
+  zoomInKey: 113
+  zoomOutKey: 101
 --- !u!1 &424661844
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +900,7 @@ MonoBehaviour:
   waypoints: []
   currentWaveIndex: -1
   waveInProgress: 0
-  autoStartWaves: 1
+  autoStartWaves: 0
   waveStartDelay: 3
   enemiesRemaining: 0
   enemiesAlive: 0
