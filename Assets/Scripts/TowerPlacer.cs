@@ -86,12 +86,6 @@ public class TowerPlacer : MonoBehaviour
         {
             Vector3 targetPosition = hit.point;
             
-            // Snap to grid if enabled
-            if (snapToGrid)
-            {
-                targetPosition = SnapToGrid(targetPosition);
-            }
-            
             previewTower.transform.position = targetPosition;
             previewTower.SetActive(true);
             
