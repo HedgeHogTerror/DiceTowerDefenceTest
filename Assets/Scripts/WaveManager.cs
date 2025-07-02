@@ -161,8 +161,16 @@ public class WaveManager : MonoBehaviour
     private void SpawnEnemy(Wave wave)
     {
         if (wave.enemyPrefab == null || spawnPoint == null) return;
-        
-        GameObject enemyObj = Instantiate(wave.enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        // Find or create the parent container
+        GameObject enemiesParent = GameObject.Find("Enemies");
+        if (enemiesParent == null)
+        {
+            enemiesParent = new GameObject("Enemies");
+        }
+
+        // Instantiate enemy as a child of the parent container
+        GameObject enemyObj = Instantiate(wave.enemyPrefab, spawnPoint.position, spawnPoint.rotation, enemiesParent.transform);
         activeEnemies.Add(enemyObj);
         enemiesAlive++;
         

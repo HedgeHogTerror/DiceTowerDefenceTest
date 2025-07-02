@@ -81,10 +81,8 @@ public class UIManager : MonoBehaviour
     
     private void SetupButtons()
     {
-         Debug.Log("SetupButtons");
         if (startWaveButton != null)
         {
-            Debug.Log("startWaveButton");
             startWaveButton.onClick.AddListener(StartNextWave);
         }
         
