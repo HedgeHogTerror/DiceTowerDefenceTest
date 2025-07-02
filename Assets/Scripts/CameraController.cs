@@ -141,9 +141,9 @@ public class CameraController : MonoBehaviour
         // Rotation input (WASD)
         float horizontalInput = 0f;
         float verticalInput = 0f;
-        if (Input.GetKey(KeyCode.A))
-            horizontalInput = -1f;
         if (Input.GetKey(KeyCode.D))
+            horizontalInput = -1f;
+        if (Input.GetKey(KeyCode.A))
             horizontalInput = 1f;
         if (Input.GetKey(KeyCode.W))
             verticalInput = 1f;
