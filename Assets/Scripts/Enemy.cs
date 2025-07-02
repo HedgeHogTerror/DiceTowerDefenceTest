@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     private int currentWaypointIndex = 0;
     private Health health;
     private GameManager gameManager;
+    private NavMeshAgent agent;
     
     public float MoveSpeed => moveSpeed;
     public int RewardValue => rewardValue;
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
     {
         health = GetComponent<Health>();
         gameManager = FindObjectOfType<GameManager>();
+        agent = GetComponent<NavMeshAgent>();
         
         if (health != null)
         {
@@ -41,39 +44,24 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+
+        if (waypoints != null && waypoints.Length > 0)
+        {
+            agent.SetDestination(waypoints[0].position);
+        }
     }
     
     private void Update()
     {
-        Move();
-    }
-    
-    private void Move()
-    {
-        if (waypoints == null || waypoints.Length == 0) return;
-        
-        if (currentWaypointIndex < waypoints.Length)
+        if (waypoints != null && currentWaypointIndex < waypoints.Length)
         {
-            Vector3 targetPosition = waypoints[currentWaypointIndex].position;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            
-            // Look at the target
-            Vector3 direction = (targetPosition - transform.position).normalized;
-            if (direction != Vector3.zero)
-            {
-                transform.rotation = Quaternion.LookRotation(direction);
-            }
-            
-            // Check if reached waypoint
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            if (!agent.pathPending && agent.remainingDistance < 0.1f)
             {
                 currentWaypointIndex++;
-                
-                // If reached the end, damage player and destroy enemy
-                if (currentWaypointIndex >= waypoints.Length)
-                {
+                if (currentWaypointIndex < waypoints.Length)
+                    agent.SetDestination(waypoints[currentWaypointIndex].position);
+                else
                     ReachEnd();
-                }
             }
         }
     }

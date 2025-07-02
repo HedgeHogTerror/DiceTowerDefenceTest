@@ -35,7 +35,7 @@ This collection of C# scripts provides a complete foundation for creating a towe
 
 ### 5. GameManager.cs
 **Purpose**: Central game state management (Singleton pattern).
-- Manages player resources (money, lives)
+- Manages player resources (money, lives)  
 - Handles game states (game over, victory, pause)
 - Wave progression tracking
 - Save/load functionality framework
