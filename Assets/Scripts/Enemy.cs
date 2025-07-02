@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         health = GetComponent<Health>();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         
         if (health != null)
