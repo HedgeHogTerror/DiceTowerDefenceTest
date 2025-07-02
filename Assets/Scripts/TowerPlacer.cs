@@ -98,14 +98,7 @@ public class TowerPlacer : MonoBehaviour
             previewTower.SetActive(false);
         }
     }
-    
-    private Vector3 SnapToGrid(Vector3 position)
-    {
-        float snappedX = Mathf.Round(position.x / gridSize) * gridSize;
-        float snappedZ = Mathf.Round(position.z / gridSize) * gridSize;
-        return new Vector3(snappedX, position.y, snappedZ);
-    }
-    
+
     private void UpdatePreviewMaterial(bool canPlace)
     {
         if (previewTower == null) return;
