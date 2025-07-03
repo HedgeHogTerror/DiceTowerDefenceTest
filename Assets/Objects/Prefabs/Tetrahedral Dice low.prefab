@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4631291314063548485}
   - component: {fileID: 4079386805830549457}
   - component: {fileID: 6588331982647420968}
+  - component: {fileID: -7363601375603221200}
   m_Layer: 0
   m_Name: Tetrahedral Dice low
   m_TagString: Dice
@@ -137,3 +138,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 9064882488472567831, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
+--- !u!114 &-7363601375603221200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820693581353135737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c607e1286d0f29d438de56e1fe456e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  range: 5
+  fireRate: 1
+  cost: 50
+  firePoint: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  rangeIndicator: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
