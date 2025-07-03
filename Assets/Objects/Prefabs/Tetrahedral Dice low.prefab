@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6588331982647420968}
   m_Layer: 0
   m_Name: Tetrahedral Dice low
-  m_TagString: Untagged
+  m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
