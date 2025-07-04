@@ -2,13 +2,53 @@ using UnityEngine;
 
 public class MoveDice : MonoBehaviour
 {
-    [SerializeField] private GameObject dice;
-
-    private float diceX;
-    private float diceY;
-    private float diceZ;
+    [SerializeField] private float moveSpeed = 10f;
+    private GameObject dice;
 
     private void Update()
+    {
+        GetTargetDice();
+
+        MoveTargetDice();
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            dice = null;
+        }
+    }
+
+    private void MoveTargetDice()
+    {
+        if (Input.GetMouseButton(0) && dice != null)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+            RaycastHit hit;
+            Vector3 targetPosition;
+
+            plane.Raycast(ray, out float point);
+            targetPosition = ray.GetPoint(point);
+
+            // Keep dice at its original Y position
+            targetPosition.y = dice.transform.position.y;
+
+            if (targetPosition != dice.transform.position)
+            {
+                // Move the dice to the new position
+                dice.transform.position = Vector3.MoveTowards(
+                    dice.transform.position,
+                    targetPosition,
+                    moveSpeed * Time.deltaTime
+                );
+            }
+            else
+            {
+                Debug.Log("Dice is already at the target position.");
+            }
+        }
+    }
+
+    private void GetTargetDice()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -18,26 +58,7 @@ public class MoveDice : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform.gameObject.tag == "Dice")
             {
                 dice = hit.transform.gameObject;
-                diceX = dice.transform.position.x;
-                diceY = dice.transform.position.y;
             }
-        }
-
-        if (Input.GetMouseButton(0) && dice != null)
-        {
-            Vector3 mousePosition = Input.mousePosition;
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                // Move the dice to the new position
-                dice.transform.position = new Vector3(diceX, diceY, hit.point.z);
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            dice = null;
         }
     }
 }
