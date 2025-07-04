@@ -9677,7 +9677,6 @@ GameObject:
   - component: {fileID: 8461846582903198423}
   - component: {fileID: 1432503776327017652}
   - component: {fileID: 5092009248233610118}
-  - component: {fileID: 7283597831784255247}
   m_Layer: 0
   m_Name: vfx_Shield_01
   m_TagString: Untagged
@@ -14502,20 +14501,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7283597831784255247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7314526620251459061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3626f2e885f8d7147acabb036bb51143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  damage: 25
-  lifeTime: 5
-  hitEffect: {fileID: 0}
-  trail: {fileID: 0}

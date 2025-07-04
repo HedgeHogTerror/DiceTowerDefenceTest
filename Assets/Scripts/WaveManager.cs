@@ -170,12 +170,13 @@ public class WaveManager : MonoBehaviour
         }
 
         // Instantiate enemy as a child of the parent container
-        GameObject enemyObj = Instantiate(wave.enemyPrefab, spawnPoint.position, spawnPoint.rotation, enemiesParent.transform);
+        GameObject enemyObj = Instantiate(wave.enemyPrefab, spawnPoint.position, Quaternion.identity, enemiesParent.transform);
         activeEnemies.Add(enemyObj);
         enemiesAlive++;
         
         // Configure enemy
         Enemy enemy = enemyObj.GetComponent<Enemy>();
+        
         if (enemy != null)
         {
             // Set waypoints
@@ -183,7 +184,7 @@ public class WaveManager : MonoBehaviour
             {
                 enemy.SetWaypoints(waypoints);
             }
-            
+
             // Apply wave modifiers
             float newSpeed = enemy.MoveSpeed * wave.enemySpeedMultiplier;
             int newReward = enemy.RewardValue * wave.enemyRewardMultiplier;

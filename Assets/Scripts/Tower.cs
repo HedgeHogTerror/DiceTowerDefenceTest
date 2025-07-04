@@ -4,15 +4,25 @@ using System.Collections;
 
 public class Tower : MonoBehaviour
 {
+    public enum TowerType
+    {
+        d4,
+        d6,
+        d8,
+        d12,
+        d14
+}
+
     [Header("Tower Stats")]
     [SerializeField] private float damage = 25f;
     [SerializeField] private float range = 5f;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private int cost = 50;
+    [SerializeField] private TowerType towerType; 
 
     [Header("References")]
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject[] projectilePrefabs; // Array of projectile prefabs for each tower type
     [SerializeField] private LineRenderer rangeIndicator;
 
     [Header("Targeting")]
@@ -93,7 +103,7 @@ public class Tower : MonoBehaviour
         foreach (Collider enemyCollider in enemiesFound)
         {
             Enemy enemy = enemyCollider.GetComponent<Enemy>();
-            if (enemy != null)
+            if (enemy != null && !enemy.isDead)
             {
                 enemiesInRange.Add(enemyCollider.transform);
             }
@@ -127,27 +137,72 @@ public class Tower : MonoBehaviour
         target = closestEnemy;
     }
 
-    private void LookAtTarget()
-    {
-        if (target == null) return;
+    // private void LookAtTarget()
+    // {
+    //     if (target == null) return;
 
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }
+    //     Vector3 direction = (target.position - transform.position).normalized;
+    //     Quaternion lookRotation = Quaternion.LookRotation(direction);
+    //     transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    // }
 
     private void Fire()
     {
-        if (target == null || projectilePrefab == null) return;
+        if (target == null) return;
+
+        // Get the appropriate projectile prefab for this tower type
+        GameObject projectilePrefab = GetProjectilePrefab();
+        if (projectilePrefab == null) return;
 
         Transform spawnPoint = firePoint != null ? firePoint : transform;
         GameObject projectileObj = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
-
-        Projectile projectile = projectileObj.GetComponent<Projectile>();
-        if (projectile != null)
+        
+        // Try to set target and damage using reflection to work with any projectile type
+        MonoBehaviour[] projectileComponents = projectileObj.GetComponents<MonoBehaviour>();
+        bool projectileConfigured = false;
+        
+        foreach (MonoBehaviour component in projectileComponents)
         {
-            projectile.SetTarget(target);
-            projectile.SetDamage(damage);
+            // Check if this component has SetTarget and SetDamage methods
+            var setTargetMethod = component.GetType().GetMethod("SetTarget");
+            var setDamageMethod = component.GetType().GetMethod("SetDamage");
+            
+            if (setTargetMethod != null && setDamageMethod != null)
+            {
+                setTargetMethod.Invoke(component, new object[] { target });
+                setDamageMethod.Invoke(component, new object[] { damage });
+                projectileConfigured = true;
+                break;
+            }
+        }
+        
+        if (!projectileConfigured)
+        {
+            Debug.LogWarning($"Tower {gameObject.name}: Could not configure projectile {projectileObj.name}. Make sure it has SetTarget and SetDamage methods.");
+        }
+    }
+
+    private GameObject GetProjectilePrefab()
+    {
+        // Return the appropriate projectile prefab based on tower type
+        if (projectilePrefabs == null || projectilePrefabs.Length == 0)
+        {
+            Debug.LogWarning($"Tower {gameObject.name}: No projectile prefabs assigned!");
+            return null;
+        }
+
+        int towerTypeIndex = (int)towerType;
+        
+        // Make sure the index is valid
+        if (towerTypeIndex >= 0 && towerTypeIndex < projectilePrefabs.Length)
+        {
+            return projectilePrefabs[towerTypeIndex];
+        }
+        else
+        {
+            Debug.LogWarning($"Tower {gameObject.name}: Invalid tower type index {towerTypeIndex} for projectile array of length {projectilePrefabs.Length}");
+            // Return first available projectile as fallback
+            return projectilePrefabs[0];
         }
     }
 
