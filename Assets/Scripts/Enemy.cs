@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class Enemy : MonoBehaviour
     
     [Header("References")]
     [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Animator goblinAnimation;
     
     private int currentWaypointIndex = 0;
     private Health health;
     private GameManager gameManager;
     private NavMeshAgent agent;
+    private bool isDead = false;
     
     public float MoveSpeed => moveSpeed;
     public int RewardValue => rewardValue;
@@ -25,6 +28,9 @@ public class Enemy : MonoBehaviour
         health = GetComponent<Health>();
         gameManager = FindFirstObjectByType<GameManager>();
         agent = GetComponent<NavMeshAgent>();
+        goblinAnimation = GetComponentInChildren<Animator>();
+
+        goblinAnimation.SetTrigger("Alive");
         
         if (health != null)
         {
@@ -53,6 +59,11 @@ public class Enemy : MonoBehaviour
     
     private void Update()
     {
+        if (isDead)
+        {
+            agent.isStopped = true;
+            return;
+        }
         if (waypoints != null && currentWaypointIndex < waypoints.Length)
         {
             if (!agent.pathPending && agent.remainingDistance < 0.1f)
@@ -76,14 +87,24 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
     
+
+    private IEnumerator CallAfterDelay(GameObject enemy)
+    {
+        yield return new WaitForSeconds(1f); // 1 second delay
+        Destroy(enemy);
+    }
+    
     private void OnEnemyDeath()
     {
+        isDead = true;
+        agent.isStopped = true;
         if (gameManager != null)
         {
             gameManager.AddMoney(rewardValue);
         }
-        
-        Destroy(gameObject);
+        goblinAnimation.SetTrigger("Died");
+
+        StartCoroutine(CallAfterDelay(gameObject)); ;
     }
     
     public void SetWaypoints(Transform[] newWaypoints)
