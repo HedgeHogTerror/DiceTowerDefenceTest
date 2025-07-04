@@ -29,6 +29,9 @@ public class MoveDice : MonoBehaviour
             plane.Raycast(ray, out float point);
             targetPosition = ray.GetPoint(point);
 
+            // Keep dice at its original Y position
+            targetPosition.y = dice.transform.position.y;
+
             if (targetPosition != dice.transform.position)
             {
                 // Move the dice to the new position
