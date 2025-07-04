@@ -96,13 +96,13 @@ public class Projectile : MonoBehaviour
                 {
                     enemyHealth.TakeDamage(damage);
                 }
-                
+
                 // Spawn hit effect
                 if (hitEffect != null)
                 {
                     Instantiate(hitEffect, transform.position, transform.rotation);
                 }
-                
+
                 Destroy(gameObject);
             }
         }

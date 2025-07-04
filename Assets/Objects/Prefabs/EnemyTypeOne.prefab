@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 893636256428045190}
   - component: {fileID: 506731578784033058}
   - component: {fileID: 2239034188221670492}
+  - component: {fileID: 7618893657659548985}
   m_Layer: 0
   m_Name: EnemyTypeOne
   m_TagString: Dice
@@ -180,3 +181,23 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7618893657659548985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805631897949946333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435644c7a3187fb4ba7a2fe5c3eee804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 10
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
