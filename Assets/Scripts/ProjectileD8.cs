@@ -62,6 +62,7 @@ public class ProjectileD8 : ProjectileBase
         // Spawn explosion effect
         if (explosionEffect != null)
         {
+            explosionEffect.transform.localScale = Vector3.one * explosionRadius; // Scale effect to match radius
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
         else
