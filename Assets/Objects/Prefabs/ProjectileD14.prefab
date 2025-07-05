@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6910876377910198264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5685107022935933233}
+  - component: {fileID: 8733054734732000675}
+  m_Layer: 0
+  m_Name: ProjectileD14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5685107022935933233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6910876377910198264}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5992137, y: 13.071674, z: -5.955073}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8733054734732000675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6910876377910198264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0675816efa871d4ca43fda538790c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
+  damage: 1
+  lifeTime: 0.1
+  hitEffect: {fileID: 2787556212050310887, guid: 56bcc472547d6b74eb51b4af55f0fb03, type: 3}
+  trail: {fileID: 0}
+  beamDuration: 1
+  damagePerSecond: 50
+  homingStrength: 10000
+  maxTurnRate: 3600
+  beamWidth: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  laserLine: {fileID: 0}
+  beamStartEffect: {fileID: 2705533495200665743, guid: 5b211d20c451bbf49bdad7d2e0238daa, type: 3}
+  beamEndEffect: {fileID: 2787556212050310887, guid: 56bcc472547d6b74eb51b4af55f0fb03, type: 3}
+  laserMaterial: {fileID: 0}
