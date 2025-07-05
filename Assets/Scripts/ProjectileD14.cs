@@ -6,7 +6,7 @@ public class ProjectileD14 : ProjectileBase
     [Header("D14 Laser Beam Settings")]
     [SerializeField] private float beamDuration = 3f;
     [SerializeField] private float damagePerSecond = 15f;
-    [SerializeField] private float homingStrength = 8f;
+    [SerializeField] private float homingStrength = 8000f;
     [SerializeField] private float maxTurnRate = 360f; // degrees per second
     [SerializeField] private float beamWidth = 0.2f;
     [SerializeField] private LayerMask enemyLayerMask = -1;
