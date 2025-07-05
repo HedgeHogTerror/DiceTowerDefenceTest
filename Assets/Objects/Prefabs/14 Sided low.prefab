@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5995128502015292176}
   - component: {fileID: 6984283352323779401}
   - component: {fileID: 2689837336133543687}
+  - component: {fileID: 8948592963292293420}
   m_Layer: 0
   m_Name: 14 Sided low
   m_TagString: Dice
@@ -137,3 +138,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2229797835081976834, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
+--- !u!114 &8948592963292293420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542955548878667949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e684798683340c98efc07356189546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
