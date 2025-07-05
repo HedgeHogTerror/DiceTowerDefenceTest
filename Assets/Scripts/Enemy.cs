@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private int rewardValue = 10;
     [SerializeField] private int damage = 1;
+    [SerializeField] private int corpseDissapearTime = 3;
     
     [Header("References")]
     [SerializeField] private Transform[] waypoints;
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
     private Health health;
     private GameManager gameManager;
     private NavMeshAgent agent;
-    private bool isDead = false;
+    public bool isDead = false;
     
     public float MoveSpeed => moveSpeed;
     public int RewardValue => rewardValue;
@@ -29,7 +30,6 @@ public class Enemy : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         goblinAnimation = GetComponentInChildren<Animator>();
-
         goblinAnimation.SetTrigger("Alive");
         
         if (health != null)
@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator CallAfterDelay(GameObject enemy)
     {
-        yield return new WaitForSeconds(1f); // 1 second delay
+        yield return new WaitForSeconds(corpseDissapearTime); // Use the serialized field
         Destroy(enemy);
     }
     
@@ -98,13 +98,20 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         agent.isStopped = true;
+        DisableCollisions();
         if (gameManager != null)
         {
             gameManager.AddMoney(rewardValue);
         }
         goblinAnimation.SetTrigger("Died");
-
+        
         StartCoroutine(CallAfterDelay(gameObject)); ;
+    }
+    private void DisableCollisions()
+    {
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+            col.enabled = false;
     }
     
     public void SetWaypoints(Transform[] newWaypoints)

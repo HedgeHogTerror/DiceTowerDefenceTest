@@ -155,6 +155,7 @@ MonoBehaviour:
   range: 5
   fireRate: 1
   cost: 50
+  towerType: 0
   firePoint: {fileID: 0}
   projectilePrefab: {fileID: 0}
   rangeIndicator: {fileID: 0}
