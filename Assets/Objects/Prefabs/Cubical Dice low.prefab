@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 81813671732670095}
   - component: {fileID: 343204923814345415}
   - component: {fileID: 4999131499405210793}
-  - component: {fileID: 2965319505238847936}
+  - component: {fileID: -7116803630267865916}
   - component: {fileID: -7180284527466073803}
   m_Layer: 0
   m_Name: Cubical Dice low
@@ -116,8 +116,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2965319505238847936
-BoxCollider:
+--- !u!64 &-7116803630267865916
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -134,9 +134,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 1.9999998, z: 1.9999998}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7681751373519516398, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
 --- !u!114 &-7180284527466073803
 MonoBehaviour:
   m_ObjectHideFlags: 0

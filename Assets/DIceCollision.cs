@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class DiceCollision : MonoBehaviour
 {
+    public bool isMoving = false;
+
     private void OnCollisionEnter(Collision collision)
     {
         // Check if the collided object has the tag "Dice"
-        if (collision.gameObject.CompareTag("Dice"))
+        if (isMoving && collision.gameObject.CompareTag("Dice"))
         {
             var collidedDiceHeight = collision.gameObject.transform.position.y;
 
