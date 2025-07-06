@@ -11,19 +11,20 @@ public class Tower : MonoBehaviour
         d8,
         d12,
         d14
-}
+    }
 
     [Header("Tower Stats")]
     [SerializeField] private float damage = 25f;
     [SerializeField] private float range = 5f;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private int cost = 50;
-    [SerializeField] private TowerType towerType; 
+    [SerializeField] private TowerType towerType;
 
     [Header("References")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject[] projectilePrefabs; // Array of projectile prefabs for each tower type
     [SerializeField] private LineRenderer rangeIndicator;
+    [SerializeField] private LineRenderer rangeIndicator2;
 
     [Header("Targeting")]
     [SerializeField] private LayerMask enemyLayerMask = -1;
@@ -37,6 +38,7 @@ public class Tower : MonoBehaviour
     public float FireRate => fireRate;
     public int Cost => cost;
     public Transform Target => target;
+    private bool fireEnabled = true;
 
     private void Start()
     {
@@ -58,11 +60,15 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
-         Tower uppperTower = GetTowerOnTop();
-        if (uppperTower != null)
+        //disable if there's a tower on top
+        if (GetTowerOnTop())
         {
-            Debug.LogWarning($"Tower {gameObject.name} has a tower on top");
-            return;
+            fireEnabled = false;
+        }
+        else
+        {
+            fireEnabled = true;
+            UpdateUpgrades(GetAllTowerTypesBelow());
         }
         if (target == null)
         {
@@ -80,10 +86,8 @@ public class Tower : MonoBehaviour
         // comment for now, causes issues with stability
         // LookAtTarget(); 
 
-
-
         // Fire at target
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextFireTime && fireEnabled)
         {
             Fire();
             nextFireTime = Time.time + 1f / fireRate;
@@ -162,17 +166,17 @@ public class Tower : MonoBehaviour
 
         Transform spawnPoint = firePoint != null ? firePoint : transform;
         GameObject projectileObj = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
-        
+
         // Try to set target and damage using reflection to work with any projectile type
         MonoBehaviour[] projectileComponents = projectileObj.GetComponents<MonoBehaviour>();
         bool projectileConfigured = false;
-        
+
         foreach (MonoBehaviour component in projectileComponents)
         {
             // Check if this component has SetTarget and SetDamage methods
             var setTargetMethod = component.GetType().GetMethod("SetTarget");
             var setDamageMethod = component.GetType().GetMethod("SetDamage");
-            
+
             if (setTargetMethod != null && setDamageMethod != null)
             {
                 setTargetMethod.Invoke(component, new object[] { target });
@@ -181,7 +185,7 @@ public class Tower : MonoBehaviour
                 break;
             }
         }
-        
+
         if (!projectileConfigured)
         {
             Debug.LogWarning($"Tower {gameObject.name}: Could not configure projectile {projectileObj.name}. Make sure it has SetTarget and SetDamage methods.");
@@ -198,7 +202,7 @@ public class Tower : MonoBehaviour
         }
 
         int towerTypeIndex = (int)towerType;
-        
+
         // Make sure the index is valid
         if (towerTypeIndex >= 0 && towerTypeIndex < projectilePrefabs.Length)
         {
@@ -280,11 +284,11 @@ public class Tower : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
-    
-    public Tower GetTowerOnTop(float maxDistance = 1f)
+
+    public bool GetTowerOnTop(float maxDistance = 1f)
     {
         // Start from the top of this tower's collider (or just above its position)
-        Vector3 origin = transform.position + Vector3.up * 1f; // Adjust 0.6f to your tower's height/offset
+        Vector3 origin = transform.position + Vector3.up * 0.6f; // Adjust 0.6f to your tower's height/offset
         Ray ray = new Ray(origin, Vector3.up);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, maxDistance))
@@ -292,9 +296,68 @@ public class Tower : MonoBehaviour
             Tower towerAbove = hit.collider.GetComponent<Tower>();
             if (towerAbove != null && towerAbove != this)
             {
-                return towerAbove;
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    public Dictionary<TowerType, int> GetAllTowerTypesBelow(float maxDistance = 1f)
+    {
+        Dictionary<TowerType, int> typesBelow = new Dictionary<TowerType, int>();
+        foreach (TowerType type in System.Enum.GetValues(typeof(TowerType)))
+        {
+            typesBelow[type] = 0; // Initialize all types to 0
+        }
+        GetTowerTypesBelowRecursive(this, typesBelow, maxDistance);
+        return typesBelow;
+    }
+
+    private void GetTowerTypesBelowRecursive(Tower current, Dictionary<TowerType, int> types, float maxDistance)
+    {
+        // Start from just below the current tower's position
+        Vector3 origin = current.transform.position - Vector3.down * 0.6f;
+        Ray ray = new Ray(origin, Vector3.down);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, maxDistance))
+        {
+            Tower towerBelow = hit.collider.GetComponent<Tower>();
+            if (towerBelow != null && towerBelow != current)
+            {
+                types[towerBelow.towerType]++;
+                // Recursively check for more towers below
+                GetTowerTypesBelowRecursive(towerBelow, types, maxDistance);
+            }
+        }
+    }
+
+    private void UpdateUpgrades(Dictionary<TowerType, int> types)
+    {
+        foreach (var type in types)
+        {
+            // Apply upgrades based on the tower types below
+            switch (type.Key)
+            {
+                case TowerType.d4: // rare but should be strong
+                    damage *= type.Value + 1;
+                    fireRate *= type.Value + 1;
+                    range *= type.Value + 1;
+                    break;
+                case TowerType.d6: // common but versatile
+                    damage *= type.Value + 1;
+                    break;
+                case TowerType.d8: // uncommon but powerful
+                    range *= type.Value + 1;
+                    break;
+                case TowerType.d12: // very rare but extremely powerful
+                    fireRate *= type.Value + 1;
+                    break;
+                case TowerType.d14:
+                    // For d14, let's say it increases damage and range
+                    damage *= type.Value + 1;
+                    range *= type.Value + 1;
+                    break;
+            }
+        }
     }
 }

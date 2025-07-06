@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3538543488810879210
+--- !u!1 &5820693581353135737
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8949824459173778925}
-  - component: {fileID: 81813671732670095}
-  - component: {fileID: 343204923814345415}
-  - component: {fileID: 4999131499405210793}
-  - component: {fileID: -7116803630267865916}
-  - component: {fileID: -7180284527466073803}
+  - component: {fileID: 5777177552425211193}
+  - component: {fileID: 7099948299404144530}
+  - component: {fileID: 4631291314063548485}
+  - component: {fileID: 4079386805830549457}
+  - component: {fileID: 6588331982647420968}
+  - component: {fileID: -7363601375603221200}
+  - component: {fileID: 6516919127280312002}
   m_Layer: 0
-  m_Name: Cubical Dice low
+  m_Name: D4Tower
   m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8949824459173778925
+--- !u!4 &5777177552425211193
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538543488810879210}
+  m_GameObject: {fileID: 5820693581353135737}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -8.236696, y: -10.559999, z: -17.36}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -8.35, y: 0, z: -8.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &81813671732670095
+--- !u!33 &7099948299404144530
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538543488810879210}
-  m_Mesh: {fileID: -7681751373519516398, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
---- !u!23 &343204923814345415
+  m_GameObject: {fileID: 5820693581353135737}
+  m_Mesh: {fileID: 9064882488472567831, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
+--- !u!23 &4631291314063548485
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538543488810879210}
+  m_GameObject: {fileID: 5820693581353135737}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,13 +90,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &4999131499405210793
+--- !u!54 &4079386805830549457
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538543488810879210}
+  m_GameObject: {fileID: 5820693581353135737}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -116,13 +117,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &-7116803630267865916
+--- !u!64 &6588331982647420968
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538543488810879210}
+  m_GameObject: {fileID: 5820693581353135737}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -137,14 +138,43 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -7681751373519516398, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
---- !u!114 &-7180284527466073803
+  m_Mesh: {fileID: 9064882488472567831, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
+--- !u!114 &-7363601375603221200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538543488810879210}
+  m_GameObject: {fileID: 5820693581353135737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c607e1286d0f29d438de56e1fe456e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  range: 10
+  fireRate: 1
+  cost: 50
+  towerType: 0
+  firePoint: {fileID: 5777177552425211193}
+  projectilePrefabs:
+  - {fileID: 7314526620251459061, guid: 51fcc6b84aef64145b136ac77721a7b6, type: 3}
+  - {fileID: 3473529909581181512, guid: 7bd0ea7a0b82b1342a5355cf88ffb036, type: 3}
+  - {fileID: 3998102855390926296, guid: 8d4e25b6b2dfcec4eb6f4c61837d1c8b, type: 3}
+  - {fileID: 9106901534952696761, guid: fa5e98cded8b2d740a6f58250aa285f5, type: 3}
+  - {fileID: 8583223215984278577, guid: 55022b5f0afce8b4c8c82585f8d053be, type: 3}
+  rangeIndicator: {fileID: 0}
+  rangeIndicator2: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &6516919127280312002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820693581353135737}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15e684798683340c98efc07356189546, type: 3}
