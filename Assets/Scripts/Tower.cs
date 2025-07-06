@@ -15,8 +15,11 @@ public class Tower : MonoBehaviour
 
     [Header("Tower Stats")]
     [SerializeField] private float damage = 25f;
+    [SerializeField] private float damageBonus = 0f;
     [SerializeField] private float range = 5f;
+    [SerializeField] private float rangeBonus = 0f;
     [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float fireRateBonus = 0f;
     [SerializeField] private int cost = 50;
     [SerializeField] private TowerType towerType;
 
@@ -76,7 +79,7 @@ public class Tower : MonoBehaviour
         }
 
         // Check if target is still in range
-        if (Vector3.Distance(transform.position, target.position) > range)
+        if (Vector3.Distance(transform.position, target.position) > range + rangeBonus)
         {
             target = null;
             return;
@@ -90,7 +93,7 @@ public class Tower : MonoBehaviour
         if (Time.time >= nextFireTime && fireEnabled)
         {
             Fire();
-            nextFireTime = Time.time + 1f / fireRate;
+            nextFireTime = Time.time + 1f /  (fireRate + fireRateBonus);
         }
     }
 
@@ -108,7 +111,7 @@ public class Tower : MonoBehaviour
     {
         enemiesInRange.Clear();
 
-        Collider[] enemiesFound = Physics.OverlapSphere(transform.position, range, enemyLayerMask);
+        Collider[] enemiesFound = Physics.OverlapSphere(transform.position, range + rangeBonus, enemyLayerMask);
 
         foreach (Collider enemyCollider in enemiesFound)
         {
@@ -180,7 +183,7 @@ public class Tower : MonoBehaviour
             if (setTargetMethod != null && setDamageMethod != null)
             {
                 setTargetMethod.Invoke(component, new object[] { target });
-                setDamageMethod.Invoke(component, new object[] { damage });
+                setDamageMethod.Invoke(component, new object[] { damage + damageBonus });
                 projectileConfigured = true;
                 break;
             }
@@ -236,7 +239,7 @@ public class Tower : MonoBehaviour
         for (int i = 0; i <= segments; i++)
         {
             float angle = i * Mathf.PI * 2f / segments;
-            Vector3 pos = new Vector3(Mathf.Cos(angle) * range, 0, Mathf.Sin(angle) * range);
+            Vector3 pos = new Vector3(Mathf.Cos(angle) * (range + rangeBonus), 0, Mathf.Sin(angle) * (range + rangeBonus));
             rangeIndicator.SetPosition(i, pos);
         }
     }
@@ -339,23 +342,23 @@ public class Tower : MonoBehaviour
             switch (type.Key)
             {
                 case TowerType.d4: // rare but should be strong
-                    damage *= type.Value + 1;
-                    fireRate *= type.Value + 1;
-                    range *= type.Value + 1;
+                    damageBonus = damage * type.Value;
+                    fireRateBonus = fireRate * type.Value;
+                    rangeBonus = range * type.Value;
                     break;
                 case TowerType.d6: // common but versatile
-                    damage *= type.Value + 1;
+                    damageBonus = damage * type.Value;
                     break;
                 case TowerType.d8: // uncommon but powerful
-                    range *= type.Value + 1;
+                    rangeBonus = range * type.Value;
                     break;
                 case TowerType.d12: // very rare but extremely powerful
-                    fireRate *= type.Value + 1;
+                    fireRateBonus = fireRate * type.Value;
                     break;
                 case TowerType.d14:
                     // For d14, let's say it increases damage and range
-                    damage *= type.Value + 1;
-                    range *= type.Value + 1;
+                    damageBonus = damage * type.Value;
+                    fireRateBonus = fireRate * type.Value;
                     break;
             }
         }
