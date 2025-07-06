@@ -340,9 +340,9 @@ public class UIManager : MonoBehaviour
     private void StartNextWave()
     {
         Debug.Log("Starting next wave...");
-        if (waveManager != null)
+        if (gameManager != null)
         {
-            waveManager.ForceStartNextWave();
+            gameManager.StartNextWave();
         }
     }
     

@@ -58,6 +58,12 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+         Tower uppperTower = GetTowerOnTop();
+        if (uppperTower != null)
+        {
+            Debug.LogWarning($"Tower {gameObject.name} has a tower on top");
+            return;
+        }
         if (target == null)
         {
             return;
@@ -278,7 +284,7 @@ public class Tower : MonoBehaviour
     public Tower GetTowerOnTop(float maxDistance = 1f)
     {
         // Start from the top of this tower's collider (or just above its position)
-        Vector3 origin = transform.position + Vector3.up * 0.6f; // Adjust 0.6f to your tower's height/offset
+        Vector3 origin = transform.position + Vector3.up * 1f; // Adjust 0.6f to your tower's height/offset
         Ray ray = new Ray(origin, Vector3.up);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, maxDistance))

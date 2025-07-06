@@ -10,10 +10,12 @@ public class ProjectileD14 : ProjectileBase
     [SerializeField] private float maxTurnRate = 360f; // degrees per second
     [SerializeField] private float beamWidth = 0.2f;
     [SerializeField] private LayerMask enemyLayerMask = -1;
+    [SerializeField] private int particleCount = 1;
     
     [Header("Visual Effects")]
     [SerializeField] private LineRenderer laserLine;
     [SerializeField] private GameObject beamStartEffect;
+    [SerializeField] private GameObject beamMiddleEffect;
     [SerializeField] private GameObject beamEndEffect;
     [SerializeField] private Material laserMaterial;
     
@@ -32,17 +34,13 @@ public class ProjectileD14 : ProjectileBase
         
         // Setup laser line renderer
         SetupLaserLine();
-        
-        // Start the laser beam
-        StartLaserBeam();
+    
     }
     
     protected override void UpdateProjectile()
     {
         if (!isBeamActive) return;
-        
-        beamTimer += Time.deltaTime;
-        
+                
         // Update target tracking
         UpdateTargetTracking();
         
@@ -51,12 +49,6 @@ public class ProjectileD14 : ProjectileBase
         
         // Update laser visual
         UpdateLaserVisual();
-        
-        // Check if beam duration is over
-        if (beamTimer >= beamDuration)
-        {
-            EndLaserBeam();
-        }
     }
     
     private void SetupLaserLine()
@@ -70,7 +62,7 @@ public class ProjectileD14 : ProjectileBase
         laserLine.startWidth = beamWidth;
         laserLine.endWidth = beamWidth;
         laserLine.useWorldSpace = true;
-        
+
         if (laserMaterial != null)
         {
             laserLine.material = laserMaterial;
@@ -93,6 +85,10 @@ public class ProjectileD14 : ProjectileBase
         {
             Instantiate(beamStartEffect, transform.position, transform.rotation);
         }
+         if (beamMiddleEffect != null)
+        {
+            SpawnParticlesAlongLine();
+        }
         
         // Start damage over time
         if (damageCoroutine != null)
@@ -102,6 +98,21 @@ public class ProjectileD14 : ProjectileBase
         damageCoroutine = StartCoroutine(DamageOverTime());
     }
     
+    private void SpawnParticlesAlongLine()
+    {
+        if (laserLine == null || beamMiddleEffect == null) return;
+
+        Vector3 startPos = laserLine.GetPosition(0);
+        Vector3 endPos = laserLine.GetPosition(1);
+
+        for (int i = 0; i <= particleCount; i++)
+        {
+            float t = (float)i / particleCount;
+            Vector3 pos = Vector3.Lerp(startPos, endPos, t);
+            Instantiate(beamMiddleEffect, pos, Quaternion.identity);
+        }
+    }
+    
     private void UpdateTargetTracking()
     {
         // Find the best target to track
@@ -109,7 +120,7 @@ public class ProjectileD14 : ProjectileBase
         {
             FindNewTarget();
         }
-        
+
         if (currentTarget != null)
         {
             target = currentTarget;
@@ -117,15 +128,15 @@ public class ProjectileD14 : ProjectileBase
             hasTarget = true;
         }
     }
-    
+
     private void FindNewTarget()
     {
         // Look for enemies in a wider radius for laser beam
         Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, 15f, enemyLayerMask);
-        
+
         float closestDistance = Mathf.Infinity;
         Transform closestEnemy = null;
-        
+
         foreach (Collider col in nearbyEnemies)
         {
             Enemy enemy = col.GetComponent<Enemy>();
@@ -139,8 +150,9 @@ public class ProjectileD14 : ProjectileBase
                 }
             }
         }
-        
+
         currentTarget = closestEnemy;
+        StartLaserBeam();
     }
     
     private bool IsTargetStillValid(Transform target)
@@ -182,31 +194,24 @@ public class ProjectileD14 : ProjectileBase
             transform.rotation = Quaternion.LookRotation(velocity);
         }
     }
-    
+
     private void UpdateLaserVisual()
     {
         if (laserLine == null) return;
-        
+
         Vector3 startPos = transform.position;
         Vector3 endPos;
-        
+
         if (hasTarget && currentTarget != null)
         {
             endPos = currentTarget.position;
+            laserLine.SetPosition(0, startPos);
+            laserLine.SetPosition(1, endPos);
         }
         else
         {
-            // Extend laser in forward direction
-            endPos = transform.position + transform.forward * 10f;
+            EndLaserBeam();
         }
-        
-        laserLine.SetPosition(0, startPos);
-        laserLine.SetPosition(1, endPos);
-        
-        // Animate laser intensity
-        float intensity = Mathf.Sin(Time.time * 10f) * 0.3f + 0.7f;
-        Color laserColor = Color.red * intensity;
-        laserLine.material.color = laserColor;
     }
     
     private IEnumerator DamageOverTime()
@@ -243,6 +248,8 @@ public class ProjectileD14 : ProjectileBase
                     float damageThisFrame = damagePerSecond * 0.1f; // 0.1 second intervals
                     enemyHealth.TakeDamage(damageThisFrame);
                 }
+            } else {
+                EndLaserBeam();
             }
         }
     }
