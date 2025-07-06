@@ -6,8 +6,7 @@ public class DiceCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the collided object has the tag "Dice"
-        if (isMoving && collision.gameObject.CompareTag("Dice"))
+        if (isMoving)
         {
             var collidedDiceHeight = collision.gameObject.transform.position.y;
 
