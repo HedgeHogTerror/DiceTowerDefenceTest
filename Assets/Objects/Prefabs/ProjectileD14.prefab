@@ -57,7 +57,9 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  particleCount: 1
   laserLine: {fileID: 0}
-  beamStartEffect: {fileID: 2705533495200665743, guid: 5b211d20c451bbf49bdad7d2e0238daa, type: 3}
-  beamEndEffect: {fileID: 2787556212050310887, guid: 56bcc472547d6b74eb51b4af55f0fb03, type: 3}
+  beamStartEffect: {fileID: 0}
+  beamMiddleEffect: {fileID: 2705533495200665743, guid: 5b211d20c451bbf49bdad7d2e0238daa, type: 3}
+  beamEndEffect: {fileID: 0}
   laserMaterial: {fileID: 0}

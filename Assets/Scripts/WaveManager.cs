@@ -106,6 +106,8 @@ public class WaveManager : MonoBehaviour
             }
             return;
         }
+
+        gameManager.StartNextWave();
         
         StartWave(currentWaveIndex + 1); // +1 because wave numbers are 1-indexed for display
     }

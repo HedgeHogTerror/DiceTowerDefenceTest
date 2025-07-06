@@ -2117,10 +2117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4979100966490751109, guid: e5d524045e06540069c7a18c41875169, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2146131011}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4542955548878667949, guid: e5d524045e06540069c7a18c41875169, type: 3}
       insertIndex: -1
@@ -2514,37 +2511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2146131010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2146131011}
-  m_Layer: 0
-  m_Name: s
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2146131011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146131010}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0, z: 1.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6149382308893091568}
-  m_LocalEulerAnglesHint: {x: 180, y: 90, z: 0}
 --- !u!4 &543450653527845699
 Transform:
   m_ObjectHideFlags: 0
@@ -3043,7 +3009,7 @@ MonoBehaviour:
   fireRate: 100
   cost: 50
   towerType: 4
-  firePoint: {fileID: 2146131011}
+  firePoint: {fileID: 0}
   projectilePrefabs:
   - {fileID: 7314526620251459061, guid: 51fcc6b84aef64145b136ac77721a7b6, type: 3}
   - {fileID: 3473529909581181512, guid: 7bd0ea7a0b82b1342a5355cf88ffb036, type: 3}
