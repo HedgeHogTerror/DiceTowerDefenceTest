@@ -40,12 +40,6 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        Tower uppperTower = GetTowerOnTop();
-        if (uppperTower != null)
-        {
-            Debug.LogWarning($"Tower {gameObject.name} has a towwer on top");
-            return;
-        }
         // Create range indicator if not assigned
         if (rangeIndicator == null)
         {
@@ -64,6 +58,12 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+         Tower uppperTower = GetTowerOnTop();
+        if (uppperTower != null)
+        {
+            Debug.LogWarning($"Tower {gameObject.name} has a tower on top");
+            return;
+        }
         if (target == null)
         {
             return;

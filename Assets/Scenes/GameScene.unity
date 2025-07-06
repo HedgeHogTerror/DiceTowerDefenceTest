@@ -2073,7 +2073,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4542955548878667949, guid: e5d524045e06540069c7a18c41875169, type: 3}
       propertyPath: m_Name
-      value: 14 Sided low
+      value: D14Tower
       objectReference: {fileID: 0}
     - target: {fileID: 4979100966490751109, guid: e5d524045e06540069c7a18c41875169, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2574,11 +2574,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3538543488810879210, guid: b282a2f39cd8548bcb078b1e3e283637, type: 3}
       propertyPath: m_Name
-      value: Cubical Dice low
+      value: D6Tower
       objectReference: {fileID: 0}
     - target: {fileID: 8949824459173778925, guid: b282a2f39cd8548bcb078b1e3e283637, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.65
+      value: -8.57
       objectReference: {fileID: 0}
     - target: {fileID: 8949824459173778925, guid: b282a2f39cd8548bcb078b1e3e283637, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2586,7 +2586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8949824459173778925, guid: b282a2f39cd8548bcb078b1e3e283637, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.85
+      value: -8.1
       objectReference: {fileID: 0}
     - target: {fileID: 8949824459173778925, guid: b282a2f39cd8548bcb078b1e3e283637, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2732,47 +2732,47 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3
+      value: -7.65
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -8.18
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.28
+      value: -2.92
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.694603
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.69460315
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.13238798
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.132388
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -68.418
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 2254117380124393900, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8993401347380529892, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
       propertyPath: m_Name
-      value: Octahedral Dice low
+      value: D8Tower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2831,7 +2831,7 @@ PrefabInstance:
       objectReference: {fileID: 8583223215984278577, guid: 55022b5f0afce8b4c8c82585f8d053be, type: 3}
     - target: {fileID: 5777177552425211193, guid: c895ab27caf9d4a969950dca89b058a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.74
+      value: -8.35
       objectReference: {fileID: 0}
     - target: {fileID: 5777177552425211193, guid: c895ab27caf9d4a969950dca89b058a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2839,7 +2839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5777177552425211193, guid: c895ab27caf9d4a969950dca89b058a1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.28
+      value: -8.04
       objectReference: {fileID: 0}
     - target: {fileID: 5777177552425211193, guid: c895ab27caf9d4a969950dca89b058a1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2871,7 +2871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5820693581353135737, guid: c895ab27caf9d4a969950dca89b058a1, type: 3}
       propertyPath: m_Name
-      value: Tetrahedral Dice low
+      value: D4Tower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2900,27 +2900,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.08
+      value: -7.84
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -10.04
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.52
+      value: -3.23
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.29179168
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.95648193
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2928,7 +2928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -146.069
       objectReference: {fileID: 0}
     - target: {fileID: 7541692095869898932, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2944,7 +2944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9221097340962428770, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
       propertyPath: m_Name
-      value: Dodecahedral Dice low
+      value: D12Tower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
