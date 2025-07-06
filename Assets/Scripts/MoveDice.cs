@@ -11,7 +11,7 @@ public class MoveDice : MonoBehaviour
 
         MoveTargetDice();
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && dice != null)
         {
             dice.GetComponent<Rigidbody>().isKinematic = false; // Re-enable physics
             dice.GetComponent<DiceCollision>().isMoving = false;
@@ -58,7 +58,6 @@ public class MoveDice : MonoBehaviour
                 dice = hit.transform.gameObject;
                 dice.GetComponent<Rigidbody>().isKinematic = true; // Disable gravity and other forces while moving
                 dice.GetComponent<DiceCollision>().isMoving = true;
-                // dice.GetComponent<MeshCollider>().enabled = false; // Disable collider to prevent collisions while moving
             }
         }
     }
