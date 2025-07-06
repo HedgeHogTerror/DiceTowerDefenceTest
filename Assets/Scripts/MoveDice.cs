@@ -13,6 +13,8 @@ public class MoveDice : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            dice.GetComponent<Rigidbody>().isKinematic = false; // Re-enable physics
+            dice.GetComponent<DiceCollision>().isMoving = false;
             dice = null;
         }
     }
@@ -41,10 +43,6 @@ public class MoveDice : MonoBehaviour
                     moveSpeed * Time.deltaTime
                 );
             }
-            else
-            {
-                Debug.Log("Dice is already at the target position.");
-            }
         }
     }
 
@@ -58,6 +56,9 @@ public class MoveDice : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform.gameObject.tag == "Dice")
             {
                 dice = hit.transform.gameObject;
+                dice.GetComponent<Rigidbody>().isKinematic = true; // Disable gravity and other forces while moving
+                dice.GetComponent<DiceCollision>().isMoving = true;
+                // dice.GetComponent<MeshCollider>().enabled = false; // Disable collider to prevent collisions while moving
             }
         }
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8432364212189859703}
   - component: {fileID: 4926042518175513471}
   - component: {fileID: 8590635222018332703}
+  - component: {fileID: 8859582495568141610}
   m_Layer: 0
   m_Name: Dodecahedral Dice low
   m_TagString: Dice
@@ -137,3 +138,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3620443524788355205, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
+--- !u!114 &8859582495568141610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221097340962428770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e684798683340c98efc07356189546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

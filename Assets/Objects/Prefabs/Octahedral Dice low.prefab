@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7365943676492283893}
   - component: {fileID: 8850438131589408506}
   - component: {fileID: 7302338123331596893}
+  - component: {fileID: -3176039273602377924}
   m_Layer: 0
   m_Name: Octahedral Dice low
   m_TagString: Dice
@@ -137,3 +138,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6884577082539126393, guid: 2a8628f49b0764b92998f6d225cdcce4, type: 3}
+--- !u!114 &-3176039273602377924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8993401347380529892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e684798683340c98efc07356189546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
