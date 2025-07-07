@@ -5,7 +5,6 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [Header("Game UI References")]
-    [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI enemiesText;
@@ -15,17 +14,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider waveProgressSlider;
     [SerializeField] private TextMeshProUGUI waveProgressText;
     
-    [Header("Tower Placement UI")]
-    [SerializeField] private Transform towerButtonContainer;
-    [SerializeField] private Button towerButtonPrefab;
-    
     [Header("Game State UI")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameWonPanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button restartButton;
-    [SerializeField] private Button pauseButton;
-    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button chaosButton;
+    [SerializeField] private Button safetyButton;
     
     [Header("Tower Info Panel")]
     [SerializeField] private GameObject towerInfoPanel;
@@ -36,8 +31,16 @@ public class UIManager : MonoBehaviour
     
     private GameManager gameManager;
     private WaveManager waveManager;
-    private TowerPlacer towerPlacer;
     private Tower selectedTower;
+    
+    enum GameState
+    {
+        Initial,
+        Paused,
+        Playing,
+        GameOver,
+        GameWon
+    }
     
     private void Start()
     {
@@ -47,27 +50,22 @@ public class UIManager : MonoBehaviour
         {
             gameManager = FindFirstObjectByType<GameManager>();
         }
-        
+
         waveManager = FindFirstObjectByType<WaveManager>();
-        towerPlacer = FindFirstObjectByType<TowerPlacer>();
-        
+
         // Subscribe to events
         if (gameManager != null)
         {
-            gameManager.OnMoneyChanged.AddListener(UpdateMoneyDisplay);
             gameManager.OnLivesChanged.AddListener(UpdateLivesDisplay);
             gameManager.OnWaveChanged.AddListener(UpdateWaveDisplay);
             gameManager.OnGameOver.AddListener(ShowGameOverPanel);
             gameManager.OnGameWon.AddListener(ShowGameWonPanel);
             gameManager.OnGamePaused.AddListener(UpdatePauseState);
         }
-        
+
         // Setup buttons
         SetupButtons();
-        
-        // Create tower placement buttons
-        CreateTowerButtons();
-        
+
         // Initialize UI
         InitializeUI();
     }
@@ -91,61 +89,28 @@ public class UIManager : MonoBehaviour
             restartButton.onClick.AddListener(RestartGame);
         }
         
-        if (pauseButton != null)
+        if (safetyButton != null)
         {
-            pauseButton.onClick.AddListener(TogglePause);
+            safetyButton.onClick.AddListener(PlaySafe);
         }
         
-        if (resumeButton != null)
+        if (chaosButton != null)
         {
-            resumeButton.onClick.AddListener(TogglePause);
+            chaosButton.onClick.AddListener(PlayChaos);
         }
-        
-        if (sellTowerButton != null)
-        {
-            sellTowerButton.onClick.AddListener(SellSelectedTower);
-        }
-        
-        if (upgradeTowerButton != null)
-        {
-            upgradeTowerButton.onClick.AddListener(UpgradeSelectedTower);
-        }
+    
     }
     
-    private void CreateTowerButtons()
+    private void PlaySafe()
     {
-        if (towerPlacer == null || towerButtonContainer == null || towerButtonPrefab == null)
-        {
-            return;
-        }
-        
-        for (int i = 0; i < towerPlacer.GetTowerCount(); i++)
-        {
-            int towerIndex = i; // Capture for closure
-            GameObject towerPrefab = towerPlacer.GetTowerPrefab(i);
-            
-            if (towerPrefab != null)
-            {
-                Button towerButton = Instantiate(towerButtonPrefab, towerButtonContainer);
-                Tower towerComponent = towerPrefab.GetComponent<Tower>();
-                
-                // Setup button text
-                TextMeshProUGUI buttonText = towerButton.GetComponentInChildren<TextMeshProUGUI>();
-                if (buttonText != null && towerComponent != null)
-                {
-                    buttonText.text = $"Tower {i + 1}\n${towerComponent.Cost}";
-                }
-                
-                // Setup button click
-                towerButton.onClick.AddListener(() => SelectTowerForPlacement(towerIndex));
-                
-                // Store reference for updating affordability
-                TowerButtonUI buttonUI = towerButton.gameObject.AddComponent<TowerButtonUI>();
-                buttonUI.towerIndex = towerIndex;
-                buttonUI.button = towerButton;
-                buttonUI.originalColor = towerButton.colors.normalColor;
-            }
-        }
+        Debug.Log("Playing safe mode...");
+        // spawn dice
+    }
+
+    private void PlayChaos()
+    {
+        Debug.Log("Playing chaos mode...");
+        // spawn dice
     }
     
     private void InitializeUI()
@@ -155,25 +120,16 @@ public class UIManager : MonoBehaviour
         if (gameWonPanel != null) gameWonPanel.SetActive(false);
         if (pausePanel != null) pausePanel.SetActive(false);
         if (towerInfoPanel != null) towerInfoPanel.SetActive(false);
-        
+
+        chaosButton.gameObject.SetActive(false);
+        safetyButton.gameObject.SetActive(false);
+
         // Initialize displays
         if (gameManager != null)
         {
-            UpdateMoneyDisplay(gameManager.CurrentMoney);
             UpdateLivesDisplay(gameManager.CurrentLives);
             UpdateWaveDisplay(gameManager.CurrentWave);
         }
-    }
-    
-    private void UpdateMoneyDisplay(int money)
-    {
-        if (moneyText != null)
-        {
-            moneyText.text = $"Money: ${money}";
-        }
-        
-        // Update tower button affordability
-        UpdateTowerButtonAffordability();
     }
     
     private void UpdateLivesDisplay(int lives)
@@ -188,6 +144,7 @@ public class UIManager : MonoBehaviour
     {
         if (waveText != null)
         {
+            Debug.Log($"Updating wave display: {wave}");
             waveText.text = $"Wave: {wave}";
         }
     }
@@ -240,26 +197,10 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    private void UpdateTowerButtonAffordability()
-    {
-        if (towerPlacer == null || gameManager == null) return;
-        
-        TowerButtonUI[] towerButtons = FindObjectsOfType<TowerButtonUI>();
-        foreach (TowerButtonUI buttonUI in towerButtons)
-        {
-            bool canAfford = towerPlacer.CanAffordTower(buttonUI.towerIndex);
-            
-            ColorBlock colors = buttonUI.button.colors;
-            colors.normalColor = canAfford ? buttonUI.originalColor : Color.gray;
-            buttonUI.button.colors = colors;
-            buttonUI.button.interactable = canAfford;
-        }
-    }
-    
     private void HandleTowerSelection()
     {
         // Handle tower selection with mouse clicks
-        if (Input.GetMouseButtonDown(0) && !towerPlacer.IsPlacingTower)
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -329,14 +270,6 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    private void SelectTowerForPlacement(int towerIndex)
-    {
-        if (towerPlacer != null)
-        {
-            towerPlacer.SelectTower(towerIndex);
-        }
-    }
-    
     private void StartNextWave()
     {
         Debug.Log("Starting next wave...");
@@ -346,7 +279,7 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    private void RestartGame()
+    public void RestartGame()
     {
         Debug.Log("Restarting game...");
         if (gameManager != null)
@@ -363,37 +296,7 @@ public class UIManager : MonoBehaviour
             gameManager.TogglePause();
         }
     }
-    
-    private void SellSelectedTower()
-    {
-        if (selectedTower != null && gameManager != null)
-        {
-            // Give back half the tower cost
-            int sellValue = selectedTower.Cost / 2;
-            gameManager.AddMoney(sellValue);
-            
-            Destroy(selectedTower.gameObject);
-            DeselectTower();
-        }
-    }
-    
-    private void UpgradeSelectedTower()
-    {
-        if (selectedTower != null && gameManager != null)
-        {
-            int upgradeCost = selectedTower.Cost / 2;
-            
-            if (gameManager.SpendMoney(upgradeCost))
-            {
-                selectedTower.UpgradeDamage(selectedTower.Damage * 0.5f);
-                selectedTower.UpgradeRange(selectedTower.Range * 0.2f);
-                selectedTower.UpgradeFireRate(selectedTower.FireRate * 0.3f);
-                
-                ShowTowerInfo(selectedTower); // Refresh display
-            }
-        }
-    }
-    
+
     private void ShowGameOverPanel()
     {
         if (gameOverPanel != null)
@@ -423,7 +326,6 @@ public class UIManager : MonoBehaviour
         // Unsubscribe from events
         if (gameManager != null)
         {
-            gameManager.OnMoneyChanged.RemoveListener(UpdateMoneyDisplay);
             gameManager.OnLivesChanged.RemoveListener(UpdateLivesDisplay);
             gameManager.OnWaveChanged.RemoveListener(UpdateWaveDisplay);
             gameManager.OnGameOver.RemoveListener(ShowGameOverPanel);

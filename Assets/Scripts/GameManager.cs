@@ -1,14 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Game Settings")]
-    [SerializeField] private int startingMoney = 100;
     [SerializeField] private int startingLives = 20;
     
     [Header("Current Game State")]
-    [SerializeField] private int currentMoney;
     [SerializeField] private int currentLives;
     [SerializeField] private int currentWave = 0;
     [SerializeField] private int enemiesKilled = 0;
@@ -30,7 +29,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     // Properties
-    public int CurrentMoney => currentMoney;
     public int CurrentLives => currentLives;
     public int CurrentWave => currentWave;
     public int EnemiesKilled => enemiesKilled;
@@ -68,7 +66,6 @@ public class GameManager : MonoBehaviour
     
     private void InitializeGame()
     {
-        currentMoney = startingMoney;
         currentLives = startingLives;
         currentWave = 0;
         enemiesKilled = 0;
@@ -82,26 +79,8 @@ public class GameManager : MonoBehaviour
         }
         
         // Trigger initial events
-        OnMoneyChanged?.Invoke(currentMoney);
         OnLivesChanged?.Invoke(currentLives);
         OnWaveChanged?.Invoke(currentWave);
-    }
-    
-    public void AddMoney(int amount)
-    {
-        if (gameOver) return;
-        
-        currentMoney += amount;
-        OnMoneyChanged?.Invoke(currentMoney);
-    }
-    
-    public bool SpendMoney(int amount)
-    {
-        if (gameOver || currentMoney < amount) return false;
-        
-        currentMoney -= amount;
-        OnMoneyChanged?.Invoke(currentMoney);
-        return true;
     }
     
     public void TakeDamage(int damage)
@@ -147,22 +126,25 @@ public class GameManager : MonoBehaviour
     
     public void WaveCompleted()
     {
-        // Add bonus money for completing wave
-        int bonusMoney = currentWave * 10;
-        AddMoney(bonusMoney);
-        
         // Check if all waves are completed
         if (waveManager != null && currentWave >= waveManager.TotalWaves)
         {
             GameWon();
         }
     }
-    
+
     private void GameOver()
     {
         gameOver = true;
         Time.timeScale = 0f; // Pause the game
         OnGameOver?.Invoke();
+        StartCoroutine(DelayedRestart(3f));
+    }
+
+    private IEnumerator DelayedRestart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        RestartGame();
     }
     
     private void GameWon()
@@ -211,16 +193,10 @@ public class GameManager : MonoBehaviour
         OnGamePaused?.Invoke(gamePaused);
     }
     
-    public bool CanAfford(int cost)
-    {
-        return currentMoney >= cost && !gameOver;
-    }
-    
     // Save/Load functionality (basic implementation)
     [System.Serializable]
     public class GameData
     {
-        public int money;
         public int lives;
         public int wave;
         public int kills;
@@ -230,7 +206,6 @@ public class GameManager : MonoBehaviour
     {
         return new GameData
         {
-            money = currentMoney,
             lives = currentLives,
             wave = currentWave,
             kills = enemiesKilled
@@ -239,12 +214,10 @@ public class GameManager : MonoBehaviour
     
     public void LoadGameData(GameData data)
     {
-        currentMoney = data.money;
         currentLives = data.lives;
         currentWave = data.wave;
         enemiesKilled = data.kills;
         
-        OnMoneyChanged?.Invoke(currentMoney);
         OnLivesChanged?.Invoke(currentLives);
         OnWaveChanged?.Invoke(currentWave);
     }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.UI; // Added for UI components
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private Animator goblinAnimation;
+    [SerializeField] private GameObject healthBarPrefab; // Health bar prefab reference
     
     private int currentWaypointIndex = 0;
     private Health health;
@@ -24,6 +26,9 @@ public class Enemy : MonoBehaviour
     public int RewardValue => rewardValue;
     public int Damage => damage;
     
+    private GameObject healthBarInstance;
+    private Slider healthSlider; // or Image if using Image fill
+
     private void Start()
     {
         health = GetComponent<Health>();
@@ -35,6 +40,7 @@ public class Enemy : MonoBehaviour
         if (health != null)
         {
             health.OnDeath.AddListener(OnEnemyDeath);
+            health.OnHealthChanged.AddListener(UpdateHealthBar);
         }
         
         // Find waypoints if not assigned
@@ -55,6 +61,15 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(waypoints[0].position);
         }
+
+        // Instantiate health bar
+        if (healthBarPrefab != null)
+        {
+            healthBarInstance = Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
+            healthSlider = healthBarInstance.GetComponent<Slider>();
+            healthSlider.maxValue = health.MaxHealth;
+            healthSlider.value = health.CurrentHealth;
+        }
     }
     
     private void Update()
@@ -74,6 +89,13 @@ public class Enemy : MonoBehaviour
                 else
                     ReachEnd();
             }
+        }
+
+        // Update health bar position and value
+        if (healthBarInstance != null)
+        {
+            healthBarInstance.transform.position = transform.position + Vector3.up; // Adjust as necessary
+            healthSlider.value = health.CurrentHealth;
         }
     }
     
@@ -99,11 +121,14 @@ public class Enemy : MonoBehaviour
         isDead = true;
         agent.isStopped = true;
         DisableCollisions();
-        if (gameManager != null)
-        {
-            gameManager.AddMoney(rewardValue);
-        }
+
         goblinAnimation.SetTrigger("Died");
+        
+        // Destroy health bar on death
+        if (healthBarInstance != null)
+        {
+            Destroy(healthBarInstance);
+        }
         
         StartCoroutine(CallAfterDelay(gameObject)); ;
     }
@@ -125,5 +150,11 @@ public class Enemy : MonoBehaviour
         moveSpeed = speed;
         rewardValue = reward;
         damage = damageAmount;
+    }
+
+    private void UpdateHealthBar(float normalizedHealth)
+    {
+        if (healthSlider != null)
+            healthSlider.value = normalizedHealth;
     }
 }
