@@ -9693,7 +9693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 25
+  damage: 20
   lifeTime: 5
   hitEffect: {fileID: 3077343761403282166, guid: 7654f6329cee3ea47a7f019c5eed206c, type: 3}
   trail: {fileID: 0}

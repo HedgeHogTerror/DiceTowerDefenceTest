@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 25
+  damage: 20
   lifeTime: 5
   hitEffect: {fileID: 9080140021571130472, guid: fba0ba873ce4cf1418d45e1d3d7c0e2f, type: 3}
   trail: {fileID: 0}
