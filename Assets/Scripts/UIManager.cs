@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
     private GameManager gameManager;
     private WaveManager waveManager;
     private Tower selectedTower;
+    private int secondsToNextWave = 5;
     
     enum GameState
     {
@@ -61,6 +63,7 @@ public class UIManager : MonoBehaviour
             gameManager.OnGameOver.AddListener(ShowGameOverPanel);
             gameManager.OnGameWon.AddListener(ShowGameWonPanel);
             gameManager.OnGamePaused.AddListener(UpdatePauseState);
+            gameManager.OnWaveCompleted.AddListener(ShowChoiceButtons);
         }
 
         // Setup buttons
@@ -100,17 +103,54 @@ public class UIManager : MonoBehaviour
         }
     
     }
-    
+
     private void PlaySafe()
     {
         Debug.Log("Playing safe mode...");
         // spawn dice
+
+        waveProgressText.gameObject.SetActive(true);
+        secondsToNextWave = 30; // Example duration for next wave
+        waveProgressText.text = $"Starts in: {secondsToNextWave}";
+        StartCoroutine(UpdateTimerDelay(secondsToNextWave));
+        if (chaosButton != null) chaosButton.gameObject.SetActive(false);
+        if (safetyButton != null) safetyButton.gameObject.SetActive(false);
     }
 
     private void PlayChaos()
     {
         Debug.Log("Playing chaos mode...");
         // spawn dice
+
+        waveProgressText.gameObject.SetActive(true);
+        secondsToNextWave = 5; // Example duration for next wave
+        waveProgressText.text = $"Starts in: {secondsToNextWave}";
+        StartCoroutine(UpdateTimerDelay(secondsToNextWave));
+        if (chaosButton != null) chaosButton.gameObject.SetActive(false);
+        if (safetyButton != null) safetyButton.gameObject.SetActive(false);
+    }
+
+
+    private IEnumerator UpdateTimerDelay(int timeLeft)
+    {
+        while (timeLeft > 0)
+        {
+            // Update your UI or logic here
+            waveProgressText.text = $"Starts in: {timeLeft}";
+            yield return new WaitForSeconds(1f);
+            timeLeft--;
+        }
+
+        // Timer finished, do something here
+        waveProgressText.text = "Go!";
+        if(!waveManager.IsWaveInProgress) StartNextWave();
+        waveProgressText.gameObject.SetActive(false);
+    }
+
+    private void ShowChoiceButtons()
+    {
+        if (chaosButton != null) chaosButton.gameObject.SetActive(true);
+        if (safetyButton != null) safetyButton.gameObject.SetActive(true);
     }
     
     private void InitializeUI()
@@ -123,6 +163,7 @@ public class UIManager : MonoBehaviour
 
         chaosButton.gameObject.SetActive(false);
         safetyButton.gameObject.SetActive(false);
+        waveProgressText.gameObject.SetActive(false);
 
         // Initialize displays
         if (gameManager != null)
@@ -144,7 +185,6 @@ public class UIManager : MonoBehaviour
     {
         if (waveText != null)
         {
-            Debug.Log($"Updating wave display: {wave}");
             waveText.text = $"Wave: {wave}";
         }
     }
@@ -165,12 +205,6 @@ public class UIManager : MonoBehaviour
         {
             float progress = waveManager.GetWaveCompletionProgress();
             waveProgressSlider.value = progress;
-        }
-        
-        if (waveProgressText != null)
-        {
-            float progress = waveManager.GetWaveCompletionProgress() * 100f;
-            waveProgressText.text = $"Progress: {progress:F0}%";
         }
         
         // Update start wave button

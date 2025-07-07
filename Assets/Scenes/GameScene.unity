@@ -253,25 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005605601881e564f905a3148700236b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefabs:
-  - {fileID: 5820693581353135737, guid: c895ab27caf9d4a969950dca89b058a1, type: 3}
-  - {fileID: 3538543488810879210, guid: b282a2f39cd8548bcb078b1e3e283637, type: 3}
-  - {fileID: 8993401347380529892, guid: 6f291d231001648458aa3be3bb545da7, type: 3}
-  - {fileID: 9221097340962428770, guid: 2334dd94bdf2242739c8e7cd37ac5ea5, type: 3}
-  - {fileID: 4542955548878667949, guid: e5d524045e06540069c7a18c41875169, type: 3}
-  placementLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  previewMaterial: {fileID: 0}
-  validPlacementMaterial: {fileID: 0}
-  invalidPlacementMaterial: {fileID: 0}
-  placementRange: 100
-  showPlacementPreview: 1
-  snapToGrid: 0
-  gridSize: 1
 --- !u!4 &113933660
 Transform:
   m_ObjectHideFlags: 0
@@ -1821,7 +1802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livesText: {fileID: 724321366}
-  waveText: {fileID: 1179249991436778495, guid: 5f398d223fae2dd42b19867206bba6ed, type: 3}
+  waveText: {fileID: 1546447291}
   enemiesText: {fileID: 0}
   startWaveButton: {fileID: 2131461351}
   waveProgressSlider: {fileID: 0}
@@ -1852,6 +1833,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1546447291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1179249991436778495, guid: 5f398d223fae2dd42b19867206bba6ed, type: 3}
+  m_PrefabInstance: {fileID: 1026879575}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1635772060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3095,28 +3087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005605601881e564f905a3148700236b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefabs:
-  - {fileID: 400631869}
-  - {fileID: 1347960527}
-  - {fileID: 403173823}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 549590267}
-  - {fileID: 1907978091}
-  placementLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  previewMaterial: {fileID: 0}
-  validPlacementMaterial: {fileID: 0}
-  invalidPlacementMaterial: {fileID: 0}
-  placementRange: 100
-  showPlacementPreview: 1
-  snapToGrid: 0
-  gridSize: 1
 --- !u!114 &919132149335683581
 MonoBehaviour:
   m_ObjectHideFlags: 0

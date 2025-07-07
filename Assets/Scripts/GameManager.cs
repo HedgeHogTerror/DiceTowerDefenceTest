@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent<int> OnMoneyChanged;
     public UnityEvent<int> OnLivesChanged;
     public UnityEvent<int> OnWaveChanged;
+    public UnityEvent OnWaveCompleted;
     public UnityEvent OnGameOver;
     public UnityEvent OnGameWon;
     public UnityEvent<bool> OnGamePaused;
@@ -123,7 +124,7 @@ public class GameManager : MonoBehaviour
             waveManager.StartWave(currentWave);
         }
     }
-    
+
     public void WaveCompleted()
     {
         // Check if all waves are completed
@@ -131,6 +132,7 @@ public class GameManager : MonoBehaviour
         {
             GameWon();
         }
+        OnWaveCompleted?.Invoke();
     }
 
     private void GameOver()
