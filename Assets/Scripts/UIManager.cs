@@ -62,7 +62,6 @@ public class UIManager : MonoBehaviour
             gameManager.OnWaveChanged.AddListener(UpdateWaveDisplay);
             gameManager.OnGameOver.AddListener(ShowGameOverPanel);
             gameManager.OnGameWon.AddListener(ShowGameWonPanel);
-            gameManager.OnGamePaused.AddListener(UpdatePauseState);
             gameManager.OnWaveCompleted.AddListener(ShowChoiceButtons);
         }
 
@@ -172,9 +171,9 @@ public class UIManager : MonoBehaviour
         if (pausePanel != null) pausePanel.SetActive(false);
         if (towerInfoPanel != null) towerInfoPanel.SetActive(false);
 
-        chaosButton.gameObject.SetActive(false);
-        safetyButton.gameObject.SetActive(false);
-        waveProgressText.gameObject.SetActive(false);
+        if(chaosButton != null) chaosButton.gameObject.SetActive(false);
+        if(safetyButton != null) safetyButton.gameObject.SetActive(false);
+        if(waveProgressText != null) waveProgressText.gameObject.SetActive(false);
 
         // Initialize displays
         if (gameManager != null)
@@ -321,6 +320,7 @@ public class UIManager : MonoBehaviour
         if (gameManager != null)
         {
             gameManager.StartNextWave();
+            waveProgressText.gameObject.SetActive(false);
         }
     }
     
@@ -330,15 +330,6 @@ public class UIManager : MonoBehaviour
         if (gameManager != null)
         {
             gameManager.RestartGame();
-        }
-    }
-    
-    private void TogglePause()
-    {
-        Debug.Log("Toggling pause...");
-        if (gameManager != null)
-        {
-            gameManager.TogglePause();
         }
     }
 
@@ -357,14 +348,7 @@ public class UIManager : MonoBehaviour
             gameWonPanel.SetActive(true);
         }
     }
-    
-    private void UpdatePauseState(bool isPaused)
-    {
-        if (pausePanel != null)
-        {
-            pausePanel.SetActive(isPaused);
-        }
-    }
+
     
     private void OnDestroy()
     {
@@ -375,7 +359,6 @@ public class UIManager : MonoBehaviour
             gameManager.OnWaveChanged.RemoveListener(UpdateWaveDisplay);
             gameManager.OnGameOver.RemoveListener(ShowGameOverPanel);
             gameManager.OnGameWon.RemoveListener(ShowGameWonPanel);
-            gameManager.OnGamePaused.RemoveListener(UpdatePauseState);
         }
     }
 }

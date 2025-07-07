@@ -58,11 +58,7 @@ public class GameManager : MonoBehaviour
     
     private void Update()
     {
-        // Handle pause input
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+
     }
     
     private void InitializeGame()
@@ -166,15 +162,6 @@ public class GameManager : MonoBehaviour
         // Reload the scene or reset game state
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-    }
-    
-    public void TogglePause()
-    {
-        if (gameOver) return;
-        
-        gamePaused = !gamePaused;
-        Time.timeScale = gamePaused ? 0f : 1f;
-        OnGamePaused?.Invoke(gamePaused);
     }
     
     public void PauseGame()
