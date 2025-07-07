@@ -2744,7 +2744,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platform: {fileID: 1467205686}
   abovePlatform: {fileID: 1820881618}
-  diceCollection: []
+  diceCollection:
+  - {fileID: 5820693581353135737, guid: 609774aba2aea6641821933ac49d59f3, type: 3}
+  - {fileID: 3538543488810879210, guid: b1faa0036bb78d04889e56faf303a861, type: 3}
+  - {fileID: 8993401347380529892, guid: 18571e4b9678160429d77e6078c895ac, type: 3}
+  - {fileID: 9221097340962428770, guid: 142cf28fb7d7f1b47812d0db9046c808, type: 3}
 --- !u!1001 &4788327240072008165
 PrefabInstance:
   m_ObjectHideFlags: 0
