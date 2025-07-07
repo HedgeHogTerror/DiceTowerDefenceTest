@@ -43,6 +43,8 @@ public class WaveManager : MonoBehaviour
     public int CurrentWaveIndex => currentWaveIndex;
     public bool IsWaveInProgress => waveInProgress;
     public int EnemiesRemaining => enemiesRemaining;
+    public bool AutoStartWaves => autoStartWaves;
+    public float WaveStartDelay => waveStartDelay;
     public int EnemiesAlive => enemiesAlive;
     public Wave CurrentWave => currentWaveIndex >= 0 && currentWaveIndex < waves.Length ? waves[currentWaveIndex] : null;
     
