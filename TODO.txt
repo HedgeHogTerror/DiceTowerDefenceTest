@@ -1,4 +1,5 @@
 TODO
+- Add dice rolling.
 - Figure out why D14 doesn't shoot lasers.
 - Create a screen to choose between rolling a few die and placing a single dice.
 - Allow dice to be moved to the top of the platform.
