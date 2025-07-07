@@ -4,7 +4,7 @@ public class DiceSpawner : MonoBehaviour
 {
     [SerializeField] private Transform platform;
     [SerializeField] private Transform abovePlatform;
-    [SerializeField] private GameObject[] dice;
+    [SerializeField] private GameObject[] diceCollection;
 
     void Update()
     {
@@ -23,19 +23,22 @@ public class DiceSpawner : MonoBehaviour
      */
     public void SpawnDice()
     {
-        int diceIndex = Random.Range(0, dice.Length);
+        int diceIndex = Random.Range(0, diceCollection.Length);
         Vector3 spawnPosition = platform.position;
 
         spawnPosition.y += 2f; // Adjust the height to be slightly above the platform
-        Instantiate(dice[diceIndex], spawnPosition, Quaternion.identity);
+        var newDice = Instantiate(diceCollection[diceIndex], spawnPosition, Quaternion.identity);
+        newDice.transform.SetParent(transform);
     }
 
     public void RollDice(int count)
     {
         for (int i = 0; i < count; i++)
         {
-            int diceIndex = Random.Range(0, dice.Length);
-            GameObject newDice = Instantiate(dice[diceIndex], abovePlatform.position, Quaternion.identity);
+            int diceIndex = Random.Range(0, diceCollection.Length);
+            GameObject newDice = Instantiate(diceCollection[diceIndex], abovePlatform.position, Quaternion.identity);
+
+            newDice.transform.SetParent(transform);
             RollDice(newDice);
         }
     }
