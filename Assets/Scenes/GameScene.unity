@@ -236,7 +236,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 113933660}
-  - component: {fileID: 113933659}
   m_Layer: 0
   m_Name: TowerPlacer
   m_TagString: Untagged
@@ -244,18 +243,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &113933659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113933658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005605601881e564f905a3148700236b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &113933660
 Transform:
   m_ObjectHideFlags: 0
@@ -2696,7 +2683,6 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653527845699}
   - component: {fileID: 919132149335683579}
-  - component: {fileID: 919132149335683580}
   - component: {fileID: 919132149335683581}
   m_Layer: 0
   m_Name: Dice
@@ -2718,18 +2704,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
---- !u!114 &919132149335683580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149335683577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005605601881e564f905a3148700236b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &919132149335683581
 MonoBehaviour:
   m_ObjectHideFlags: 0
