@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4999131499405210793}
   - component: {fileID: -7116803630267865916}
   - component: {fileID: -7180284527466073803}
+  - component: {fileID: 8206450222199192240}
   m_Layer: 0
-  m_Name: Cubical Dice low
+  m_Name: D6Tower
   m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3538543488810879210}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -8.236696, y: -10.559999, z: -17.36}
+  m_LocalPosition: {x: -8.57, y: -10.56, z: -8.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,3 +152,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
+--- !u!114 &8206450222199192240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538543488810879210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c607e1286d0f29d438de56e1fe456e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  damageBonus: 0
+  range: 6
+  rangeBonus: 0
+  fireRate: 1
+  fireRateBonus: 0
+  cost: 50
+  towerType: 1
+  firePoint: {fileID: 0}
+  projectilePrefabs:
+  - {fileID: 7314526620251459061, guid: 51fcc6b84aef64145b136ac77721a7b6, type: 3}
+  - {fileID: 3473529909581181512, guid: 7bd0ea7a0b82b1342a5355cf88ffb036, type: 3}
+  - {fileID: 3998102855390926296, guid: 8d4e25b6b2dfcec4eb6f4c61837d1c8b, type: 3}
+  - {fileID: 9106901534952696761, guid: fa5e98cded8b2d740a6f58250aa285f5, type: 3}
+  - {fileID: 6910876377910198264, guid: 59ab7e6da56fc364e985dc1e1ae1d168, type: 3}
+  rangeIndicator: {fileID: 0}
+  rangeIndicator2: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

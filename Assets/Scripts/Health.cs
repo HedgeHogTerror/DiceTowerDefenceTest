@@ -19,15 +19,15 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(currentHealth);
     }
-    
+
     public void TakeDamage(float damage)
-    {      
+    {
+        currentHealth = Mathf.Max(0f, currentHealth - damage);
+        OnHealthChanged?.Invoke(currentHealth);
         if (IsDead)
         {
             OnDeath?.Invoke();
-        }  
-        currentHealth = Mathf.Max(0f, currentHealth - damage);
-        OnHealthChanged?.Invoke(currentHealth);
+        } 
     }
     
     public void Heal(float amount)
