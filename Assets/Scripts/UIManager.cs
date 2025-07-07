@@ -171,9 +171,9 @@ public class UIManager : MonoBehaviour
         if (pausePanel != null) pausePanel.SetActive(false);
         if (towerInfoPanel != null) towerInfoPanel.SetActive(false);
 
-        if(chaosButton != null) chaosButton.gameObject.SetActive(false);
-        if(safetyButton != null) safetyButton.gameObject.SetActive(false);
-        if(waveProgressText != null) waveProgressText.gameObject.SetActive(false);
+        chaosButton?.gameObject.SetActive(false);
+        safetyButton?.gameObject.SetActive(false);
+        waveProgressText?.gameObject.SetActive(false);
 
         // Initialize displays
         if (gameManager != null)
