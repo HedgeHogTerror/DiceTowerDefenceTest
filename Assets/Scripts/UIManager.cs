@@ -108,6 +108,12 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Playing safe mode...");
         // spawn dice
+        DiceSpawner diceSpawner = FindFirstObjectByType<DiceSpawner>();
+        if (diceSpawner != null)    
+        {
+            diceSpawner.SpawnDice();
+        }
+
 
         waveProgressText.gameObject.SetActive(true);
         secondsToNextWave = 30; // Example duration for next wave
@@ -121,6 +127,11 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Playing chaos mode...");
         // spawn dice
+        DiceSpawner diceSpawner = FindFirstObjectByType<DiceSpawner>();
+        if (diceSpawner != null)    
+        {
+            diceSpawner.RollDice(2);
+        }
 
         waveProgressText.gameObject.SetActive(true);
         secondsToNextWave = 5; // Example duration for next wave
