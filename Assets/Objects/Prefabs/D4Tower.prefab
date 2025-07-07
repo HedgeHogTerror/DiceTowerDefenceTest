@@ -152,8 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
+  damageBonus: 0
   range: 10
+  rangeBonus: 0
   fireRate: 1
+  fireRateBonus: 0
   cost: 50
   towerType: 0
   firePoint: {fileID: 5777177552425211193}
@@ -162,7 +165,7 @@ MonoBehaviour:
   - {fileID: 3473529909581181512, guid: 7bd0ea7a0b82b1342a5355cf88ffb036, type: 3}
   - {fileID: 3998102855390926296, guid: 8d4e25b6b2dfcec4eb6f4c61837d1c8b, type: 3}
   - {fileID: 9106901534952696761, guid: fa5e98cded8b2d740a6f58250aa285f5, type: 3}
-  - {fileID: 8583223215984278577, guid: 55022b5f0afce8b4c8c82585f8d053be, type: 3}
+  - {fileID: 6910876377910198264, guid: 59ab7e6da56fc364e985dc1e1ae1d168, type: 3}
   rangeIndicator: {fileID: 0}
   rangeIndicator2: {fileID: 0}
   enemyLayerMask:

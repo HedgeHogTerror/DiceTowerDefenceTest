@@ -57,8 +57,9 @@ public class Tower : MonoBehaviour
             rangeIndicator.enabled = false;
         }
 
-        // Start targeting coroutine
+        // Start targeting coroutines
         StartCoroutine(UpdateTargeting());
+        StartCoroutine(CheckUpgrades());
     }
 
     private void Update()
@@ -70,8 +71,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            fireEnabled = true;
-            UpdateUpgrades(GetAllTowerTypesBelow());
+            fireEnabled = true;  
         }
         if (target == null)
         {
@@ -104,6 +104,15 @@ public class Tower : MonoBehaviour
             UpdateEnemiesInRange();
             SelectTarget();
             yield return new WaitForSeconds(0.1f); // Update targeting 10 times per second
+        }
+    }
+
+    private IEnumerator CheckUpgrades()
+    {
+        while (true)
+        {
+            UpdateUpgrades(GetAllTowerTypesBelow());
+            yield return new WaitForSeconds(0.5f); // Update upgrades 2 times per second
         }
     }
 
@@ -319,7 +328,7 @@ public class Tower : MonoBehaviour
     private void GetTowerTypesBelowRecursive(Tower current, Dictionary<TowerType, int> types, float maxDistance)
     {
         // Start from just below the current tower's position
-        Vector3 origin = current.transform.position - Vector3.down * 0.6f;
+        Vector3 origin = current.transform.position;
         Ray ray = new Ray(origin, Vector3.down);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, maxDistance))
@@ -336,31 +345,38 @@ public class Tower : MonoBehaviour
 
     private void UpdateUpgrades(Dictionary<TowerType, int> types)
     {
+        // Apply upgrades based on the tower types below
+        float totalDamageBonus = 0;
+        float totalFireRateBonus = 0;
+        float totalRangeBonus = 0;
         foreach (var type in types)
         {
-            // Apply upgrades based on the tower types below
+
             switch (type.Key)
             {
                 case TowerType.d4: // rare but should be strong
-                    damageBonus = damage * type.Value;
-                    fireRateBonus = fireRate * type.Value;
-                    rangeBonus = range * type.Value;
+                    totalDamageBonus += damage * type.Value;
+                    totalFireRateBonus += fireRate * type.Value;
+                    totalRangeBonus += range * type.Value;
                     break;
                 case TowerType.d6: // common but versatile
-                    damageBonus = damage * type.Value;
+                    totalDamageBonus += damage * type.Value;
                     break;
                 case TowerType.d8: // uncommon but powerful
-                    rangeBonus = range * type.Value;
+                    totalRangeBonus += range * type.Value;
                     break;
                 case TowerType.d12: // very rare but extremely powerful
-                    fireRateBonus = fireRate * type.Value;
+                    totalFireRateBonus += fireRate * type.Value;
                     break;
                 case TowerType.d14:
                     // For d14, let's say it increases damage and range
-                    damageBonus = damage * type.Value;
-                    fireRateBonus = fireRate * type.Value;
+                    totalDamageBonus += damage * type.Value;
+                    totalFireRateBonus += fireRate * type.Value;
                     break;
             }
         }
+        damageBonus = totalDamageBonus;
+        rangeBonus = totalRangeBonus;
+        fireRateBonus = totalFireRateBonus;
     }
 }
