@@ -234,6 +234,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 0}
   goblinAnimation: {fileID: 0}
+  healthBarPrefab: {fileID: 5159142627066664141, guid: 53a36a2cd6bab5148b2ff8767b65e6b1, type: 3}
   isDead: 0
 --- !u!114 &-8028106594777034080
 MonoBehaviour:
