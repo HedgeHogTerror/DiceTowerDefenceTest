@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2254117380124393900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3279365277919825681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1493799971221131498}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1493799971221131498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279365277919825681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2254117380124393900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7750610438732639442
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +109,7 @@ GameObject:
   - component: {fileID: -3176039273602377924}
   - component: {fileID: 4468739985870934858}
   - component: {fileID: 3761524522799099909}
+  - component: {fileID: 967923159953113958}
   m_Layer: 0
   m_Name: D8Tower
   m_TagString: Dice
@@ -100,6 +132,7 @@ Transform:
   m_Children:
   - {fileID: 3906389133548993591}
   - {fileID: 8012407267511844942}
+  - {fileID: 1493799971221131498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -68.418, y: -90, z: 90}
 --- !u!33 &8596154792218279130
@@ -270,6 +303,38 @@ MonoBehaviour:
   cost: 50
   towerType: 2
   firePoint: {fileID: 8012407267511844942}
+  projectilePrefabs:
+  - {fileID: 7314526620251459061, guid: 51fcc6b84aef64145b136ac77721a7b6, type: 3}
+  - {fileID: 3473529909581181512, guid: 7bd0ea7a0b82b1342a5355cf88ffb036, type: 3}
+  - {fileID: 3998102855390926296, guid: 8d4e25b6b2dfcec4eb6f4c61837d1c8b, type: 3}
+  - {fileID: 9106901534952696761, guid: fa5e98cded8b2d740a6f58250aa285f5, type: 3}
+  - {fileID: 9106901534952696761, guid: fa5e98cded8b2d740a6f58250aa285f5, type: 3}
+  rangeIndicator: {fileID: 0}
+  rangeIndicator2: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &967923159953113958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8993401347380529892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c607e1286d0f29d438de56e1fe456e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  damageBonus: 0
+  range: 10
+  rangeBonus: 0
+  fireRate: 0.5
+  fireRateBonus: 0
+  cost: 50
+  towerType: 2
+  firePoint: {fileID: 1493799971221131498}
   projectilePrefabs:
   - {fileID: 7314526620251459061, guid: 51fcc6b84aef64145b136ac77721a7b6, type: 3}
   - {fileID: 3473529909581181512, guid: 7bd0ea7a0b82b1342a5355cf88ffb036, type: 3}
